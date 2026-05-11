@@ -6,17 +6,10 @@ export default function Nav() {
 
   useEffect(() => {
     if (!menuOpen) return;
-    const onKeyDown = e => { if (e.key === 'Escape') setMenuOpen(false); };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+    const onKeyDown = e => { if (e.key === "Escape") setMenuOpen(false); };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, [menuOpen]);
-
-  const links = [
-    { href: '#hero',        label: 'Home',        icon: '⌂' },
-    { href: '#works',       label: 'Works',       icon: '⊞' },
-    { href: '#hobbies',     label: 'Hobbies',     icon: '♡' },
-    { href: '#credentials', label: 'Credentials', icon: '✦' },
-  ];
 
   return (
     <>
@@ -25,281 +18,263 @@ export default function Nav() {
           <img src={logo} alt="Sai Mendoza logo" className="logo-icon" />
           <span className="site-title">sai.dev</span>
         </div>
-
         <button
-          className={`hamburger${menuOpen ? ' open' : ''}`}
+          className={`nav-hamburger${menuOpen ? " open" : ""}`}
           onClick={() => setMenuOpen(v => !v)}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={menuOpen}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
         >
-          <span className="hb-line hb-top" />
-          <span className="hb-line hb-mid" />
-          <span className="hb-line hb-bot" />
+          <div />
+          <div />
+          <div />
         </button>
       </nav>
 
       <div
-        className={`overlay${menuOpen ? ' show' : ''}`}
+        className={`nav-side-overlay${menuOpen ? " show" : ""}`}
         onClick={() => setMenuOpen(false)}
-        aria-hidden
+        tabIndex={menuOpen ? 0 : -1}
+        aria-hidden={!menuOpen}
       />
 
-      <aside className={`drawer${menuOpen ? ' show' : ''}`} aria-label="Site navigation">
-        <div className="drawer-head">
-          <span className="drawer-label">Menu</span>
+      <aside className={`nav-side-drawer${menuOpen ? " show" : ""}`}>
+        <div className="drawer-header">
+          <div className="drawer-logo-wrap">
+            <img src={logo} alt="Sai Mendoza logo" className="drawer-logo" />
+          </div>
+          <span className="drawer-title">sai.dev</span>
           <button
             className="drawer-close"
             aria-label="Close navigation"
             onClick={() => setMenuOpen(false)}
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+            <svg width="30" height="30" viewBox="0 0 30 30">
+              <circle cx="15" cy="15" r="14"
+                fill="rgba(253,45,68,0.09)" />
+              <path d="M10 10 L20 20 M20 10 L10 20" stroke="#fd2d44" strokeWidth="2.3" strokeLinecap="round" />
             </svg>
           </button>
         </div>
-
         <nav className="drawer-links">
-          {links.map(({ href, label, icon }) => (
-            <a
-              key={href}
-              href={href}
-              className="drawer-link"
-              onClick={() => setMenuOpen(false)}
-            >
-              <span className="link-icon" aria-hidden="true">{icon}</span>
-              {label}
-            </a>
-          ))}
+          <a href="#hero" onClick={() => setMenuOpen(false)}>Home</a>
+          <a href="#works" onClick={() => setMenuOpen(false)}>Works</a>
+          <a href="#hobbies" onClick={() => setMenuOpen(false)}>Hobbies</a>
+          <a href="#credentials" onClick={() => setMenuOpen(false)}>Credentials</a>
         </nav>
-
-        <div className="drawer-footer">
-          <div className="footer-avatar">
-            <img src={logo} alt="" className="footer-logo" />
-          </div>
-          <div className="footer-info">
-            <span className="footer-name">Sai Mendoza</span>
-            <span className="footer-sub">Portfolio</span>
-          </div>
-        </div>
       </aside>
 
       <style>{`
-        /* ── Navbar ── */
         .navbar {
           display: flex;
+          justify-content: flex-start;
           align-items: center;
-          justify-content: space-between;
-          padding: 0.9rem 1.25rem;
+          padding: 1.1em 1.15em 1em 1.15em;
           background: transparent;
-          position: relative;
-          z-index: 50;
+          z-index: 22;
         }
         .logo-title {
           display: flex;
           align-items: center;
-          gap: 0.65rem;
         }
         .logo-icon {
-          width: 32px;
-          height: 32px;
+          height: 2em;
+          width: 2em;
           border-radius: 50%;
           object-fit: cover;
+          margin-right: 0.85em;
+          box-shadow: 0 2px 8px #fd2d4455;
         }
         .site-title {
-          font-size: 1rem;
-          font-weight: 700;
-          letter-spacing: 0.03em;
+          font-size: 1.17em;
+          font-weight: 800;
+          letter-spacing: 0.035em;
           color: #fd2d44;
+          font-family: 'Bebas Neue', 'Orbitron', 'Roboto', sans-serif;
+          text-shadow: 0 2px 10px #fd2d4419;
         }
-
-        /* ── Hamburger button ── */
-        .hamburger {
-          width: 36px;
-          height: 36px;
+        .nav-hamburger {
+          margin-left: auto;
+          background: none;
+          border: none;
           display: flex;
           flex-direction: column;
-          align-items: center;
           justify-content: center;
-          gap: 5px;
-          background: transparent;
-          border: 1px solid rgba(255,255,255,0.12);
-          border-radius: 8px;
+          gap: 7px;
+          width: 35px;
+          height: 35px;
           cursor: pointer;
-          padding: 0;
-          transition: border-color 0.2s, background 0.2s;
+          border-radius: 10px;
+          z-index: 1002;
         }
-        .hamburger:hover {
-          background: rgba(255,255,255,0.06);
-          border-color: rgba(255,255,255,0.22);
-        }
-        .hb-line {
-          display: block;
-          height: 1.5px;
+        .nav-hamburger div {
+          width: 25px;
+          height: 3px;
           background: #fff;
-          border-radius: 2px;
-          transition: transform 0.25s cubic-bezier(0.4,0,0.2,1),
-                      opacity 0.2s,
-                      width 0.2s;
+          border-radius: 10px;
+          transition: .32s cubic-bezier(.73,0,.13,1.4);
+          box-shadow: 0 1px 3px #0006;
         }
-        .hb-top { width: 17px; }
-        .hb-mid { width: 17px; }
-        .hb-bot { width: 11px; align-self: flex-start; margin-left: 3px; }
-
-        .hamburger.open .hb-top { transform: translateY(6.5px) rotate(45deg); }
-        .hamburger.open .hb-mid { opacity: 0; transform: scaleX(0); }
-        .hamburger.open .hb-bot {
-          transform: translateY(-6.5px) rotate(-45deg);
-          width: 17px;
-          margin-left: 0;
+        .nav-hamburger.open div:nth-child(1) {
+          transform: translateY(8px) rotate(45deg);
+        }
+        .nav-hamburger.open div:nth-child(2) {
+          opacity: 0;
+          transform: scaleX(0.2);
+        }
+        .nav-hamburger.open div:nth-child(3) {
+          transform: translateY(-8px) rotate(-45deg);
         }
 
-        /* ── Overlay ── */
-        .overlay {
+        /* Overlay */
+        .nav-side-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(0,0,0,0);
-          z-index: 100;
+          background: rgba(20,7,28,0.27);
+          z-index: 1000;
+          opacity: 0;
           pointer-events: none;
-          transition: background 0.22s;
+          transition: opacity 0.22s;
         }
-        .overlay.show {
-          background: rgba(0,0,0,0.35);
+        .nav-side-overlay.show {
+          opacity: 1;
           pointer-events: auto;
         }
-
-        /* ── Drawer ── */
-        .drawer {
+        /* Glassy Side Drawer */
+        .nav-side-drawer {
           position: fixed;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          width: 260px;
-          background: #111016;
-          border-left: 1px solid rgba(255,255,255,0.07);
-          z-index: 200;
+          top: 0; right: 0;
+          height: 100vh;
+          width: 88vw;
+          max-width: 330px;
+          background: 
+            linear-gradient(132deg, rgba(36,28,50,0.93) 80%, rgba(253,45,68,0.07) 100%), 
+            rgba(28,10,36,0.85);
+          backdrop-filter: blur(18px) saturate(1.11);
+          box-shadow: -2px 0 20px #fd2d4444, -8px 0 56px #000a;
+          z-index: 1003;
+          transform: translateX(103%);
           display: flex;
           flex-direction: column;
-          transform: translateX(100%);
-          transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+          align-items: stretch;
+          transition: transform 0.34s cubic-bezier(.65,0,.37,1.01);
+          border-top-left-radius: 2.3em;
+          border-bottom-left-radius: 2.3em;
+          overflow-y: auto;
         }
-        .drawer.show {
+        .nav-side-drawer.show {
           transform: translateX(0);
         }
-
-        /* ── Drawer head ── */
-        .drawer-head {
+        .drawer-header {
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          padding: 1.1rem 1.25rem 0.9rem;
+          justify-content: flex-start;
+          padding: 1.3em 1.15em 1.18em 1.2em;
+          min-height: 72px;
+          gap: 0.92em;
           border-bottom: 1px solid rgba(255,255,255,0.07);
         }
-        .drawer-label {
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.35);
-        }
-        .drawer-close {
-          width: 28px;
-          height: 28px;
+        .drawer-logo-wrap {
+          background: linear-gradient(135deg,#fd2d4422 5%,#5d2bb533 70%);
+          border-radius: 50%;
+          padding: 0.26em;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: transparent;
-          border: 1px solid rgba(255,255,255,0.1);
-          border-radius: 6px;
+          box-shadow: 0 2px 15px #bb123425;
+        }
+        .drawer-logo {
+          width: 2.23em;
+          height: 2.23em;
+          object-fit: cover;
+          border-radius: 50%;
+          background: #180413;
+          box-shadow: 0 2px 11px #fd2d4450;
+        }
+        .drawer-title {
+          color: #fd2d44;
+          font-weight: 900;
+          font-size: 1.15em;
+          letter-spacing: 0.07em;
+          text-shadow: 0 1px 22px #fd2d4422;
+          font-family: 'Bebas Neue','Orbitron',sans-serif;
+        }
+        .drawer-close {
+          margin-left: auto;
+          background: none;
+          border: none;
           cursor: pointer;
-          color: rgba(255,255,255,0.5);
-          transition: background 0.15s, color 0.15s, border-color 0.15s;
+          padding: 0.36em 0.35em 0.36em 0.36em;
+          display: flex;
+          align-items: center;
+          opacity: 0.75;
+          transition: opacity 0.12s, background 0.15s;
+          border-radius: 50%;
         }
         .drawer-close:hover {
-          background: rgba(255,255,255,0.06);
-          border-color: rgba(255,255,255,0.2);
-          color: #fff;
+          background: rgba(253,45,68,0.12);
+          opacity: 1;
         }
-
-        /* ── Drawer links ── */
         .drawer-links {
           display: flex;
           flex-direction: column;
-          gap: 2px;
-          padding: 0.75rem;
-          flex: 1;
+          gap: 0.12em;
+          margin-top: 0.25em;
         }
-        .drawer-link {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 0.65rem 0.75rem;
-          border-radius: 7px;
-          text-decoration: none;
-          color: rgba(255,255,255,0.7);
-          font-size: 14px;
-          font-weight: 500;
-          letter-spacing: 0.01em;
-          border: 1px solid transparent;
-          transition: background 0.15s, color 0.15s, border-color 0.15s;
-        }
-        .drawer-link:hover {
-          background: rgba(255,255,255,0.06);
-          border-color: rgba(255,255,255,0.08);
+        .drawer-links a {
+          position: relative;
+          display: block;
+          font-family: inherit;
+          font-weight: 700;
+          font-size: 1.23em;
           color: #fff;
-        }
-        .drawer-link:hover .link-icon {
-          color: #fd2d44;
-        }
-        .link-icon {
-          font-size: 15px;
-          color: rgba(255,255,255,0.3);
-          width: 18px;
-          text-align: center;
-          transition: color 0.15s;
-          flex-shrink: 0;
-        }
-
-        /* ── Drawer footer ── */
-        .drawer-footer {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 1rem 1.25rem;
-          border-top: 1px solid rgba(255,255,255,0.07);
-        }
-        .footer-avatar {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
+          text-decoration: none;
+          text-align: left;
+          letter-spacing: 0.08em;
+          border-radius: 0.5em;
+          padding: 0.8em 1.42em 0.8em 1.5em;
+          background: none;
+          margin-bottom: 0.15em;
+          transition:
+            background 0.20s,
+            color 0.17s,
+            transform 0.13s;
           overflow: hidden;
-          flex-shrink: 0;
-          border: 1px solid rgba(255,255,255,0.1);
         }
-        .footer-logo {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+        .drawer-links a::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 24%;
+          bottom: 24%;
+          width: 0.23em;
+          border-radius: 10px;
+          background: linear-gradient(177deg,#fd2d44 40%,#380c8f 100%);
+          opacity: 0;
+          transition: opacity 0.17s;
         }
-        .footer-info {
-          display: flex;
-          flex-direction: column;
-          gap: 1px;
+        .drawer-links a:active, .drawer-links a:hover, .drawer-links a:focus {
+          background: rgba(253,45,68,0.11);
+          color: #fd2d44;
+          transform: translateX(-7px) scale(1.03);
         }
-        .footer-name {
-          font-size: 13px;
-          font-weight: 500;
-          color: rgba(255,255,255,0.85);
-        }
-        .footer-sub {
-          font-size: 11px;
-          color: rgba(255,255,255,0.35);
+        .drawer-links a:hover::before,
+        .drawer-links a:focus::before {
+          opacity: 1;
         }
 
-        @media (max-width: 480px) {
-          .drawer {
-            width: 100vw;
-            border-left: none;
+        @media (max-width: 470px) {
+          .nav-side-drawer {
+            width: 99vw;
+            max-width: 99vw;
+            border-top-left-radius: 1.4em;
+            border-bottom-left-radius: 1.4em;
+            padding: 0;
           }
+          .drawer-header {
+            padding: 1.1em 0.45em 1.02em 0.55em;
+            gap: 0.45em;
+          }
+          .drawer-logo{ width: 1.5em; height: 1.5em; }
+          .drawer-links a { font-size: 1.05em; padding: 0.67em 1em 0.67em 1.13em;}
         }
       `}</style>
     </>
