@@ -21,6 +21,9 @@ export default function Hero() {
       <div className="hero-bg-grid" />
       <div className="hero-glow" />
 
+      {/* --- The red animated orb background --- */}
+      <div className="hero-orb" />
+
       <div className="hero-content">
         <div className="hero-eyebrow">Portfolio 2025</div>
 
@@ -54,6 +57,7 @@ export default function Hero() {
 
       <div className="scroll-hint">SCROLL DOWN</div>
 
+      {/* --- Red orb animated CSS --- */}
       <style>{`
         /* ── Center everything in hero-content ── */
         #hero .hero-content {
@@ -82,10 +86,6 @@ export default function Hero() {
           width: 100%;
         }
 
-        /*
-          Logo height = ~1.76× hero-name font-size (two lines at line-height 0.88).
-          hero-name is clamp(64px, 18vw, 130px), so logo = clamp(113px, 31.7vw, 229px).
-        */
         .hero-logo {
           height: clamp(113px, 31.7vw, 229px);
           width: auto;
@@ -94,7 +94,6 @@ export default function Hero() {
           filter: drop-shadow(0 0 20px rgba(232,0,13,0.45));
         }
 
-        /* ── Name: SAI stacked above MENDOZA ── */
         .hero-name {
           margin: 0;
           font-family: 'Bebas Neue', sans-serif;
@@ -107,7 +106,6 @@ export default function Hero() {
           align-items: flex-start;
         }
 
-        /* Subtitle + badge centered below */
         #hero .hero-subtitle {
           text-align: center;
           margin-top: 24px;
@@ -115,11 +113,75 @@ export default function Hero() {
         #hero .hero-status-badge {
           align-self: center;
         }
+        .scroll-hint {
+          position: relative;
+          z-index: 2;
+        }
 
-        /* Small phones */
+        /* ---- RED ORB --- */
+        .hero-orb {
+          position: absolute;
+          top: 0; left: 0;
+          width: 100vw; height: 100vh;
+          z-index: 0;
+          pointer-events: none;
+        }
+        .hero-orb::before {
+          content: '';
+          position: absolute;
+          left: 30vw;
+          top: 35vh;
+          width: 240px;
+          height: 240px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(232,0,13,0.58) 0%, rgba(232,0,13,0.33) 60%, transparent 100%);
+          filter: blur(21px);
+          animation: orbMove 11s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbMove {
+          0% {
+            left: 12vw; top: 30vh;
+            filter: blur(24px) brightness(1.11);
+            opacity: 0.8;
+          }
+          18% {
+            left: 20vw; top: 8vh;
+            filter: blur(20px) brightness(1.09);
+            opacity: 0.65;
+          }
+          35% {
+            left: 54vw; top: 19vh;
+            filter: blur(29px) brightness(1.05);
+            opacity: 0.72;
+          }
+          55% {
+            left: 65vw; top: 64vh;
+            filter: blur(18px) brightness(1.12);
+            opacity: 0.92;
+          }
+          78% {
+            left: 32vw; top: 70vh;
+            filter: blur(25px) brightness(0.95);
+            opacity: 0.7;
+          }
+          100% {
+            left: 8vw; top: 42vh;
+            filter: blur(29px) brightness(1.10);
+            opacity: 0.85;
+          }
+        }
+
+        /* ----- Small phones ----- */
         @media (max-width: 480px) {
           .hero-logo-row { gap: 0.22em; }
           .hero-logo { height: clamp(90px, 29vw, 113px); }
+          .hero-orb::before {
+            width: 108px;
+            height: 108px;
+            left: 32vw;
+            top: 22vh;
+          }
         }
       `}</style>
     </section>
