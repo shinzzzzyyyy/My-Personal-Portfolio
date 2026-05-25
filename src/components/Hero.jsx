@@ -51,7 +51,7 @@ export default function Hero() {
 
         <div className="hero-status-badge">
           <span className="status-dot" />
-          CURRENTLY ENROLLED AS A STUDENT
+          TIGIDIDING KA RON!
         </div>
       </div>
 

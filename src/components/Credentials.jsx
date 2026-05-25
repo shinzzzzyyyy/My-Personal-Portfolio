@@ -1,4 +1,5 @@
 import React from "react";
+import ContactForm from './ContactForm';
 import { FaFacebook, FaGithub, FaDiscord, FaEnvelope } from "react-icons/fa";
 
 export default function Credentials() {
@@ -23,14 +24,8 @@ export default function Credentials() {
       handle: "notShinzy",
       link: "discord: notShinzy",
       href: "https://discord.com/users/notShinzy",
-    },
-    {
-      icon: <FaEnvelope />,
-      platform: "Email",
-      handle: "edsimonmendoza@gmail.com",
-      link: "mailto:edsimonmendoza@gmail.com",
-      href: "mailto:edsimonmendoza@gmail.com",
-    },
+    }
+    // **Remove the email entry from here!**
   ];
   return (
     <section id="credentials">
@@ -45,7 +40,7 @@ export default function Credentials() {
             key={i}
             href={c.href}
             target="_blank"
-            rel={c.platform === "Email" ? undefined : "noreferrer"}
+            rel="noreferrer"
             className={`cred-card reveal delay-${i + 1}`}
             style={{ textDecoration: "none" }}
           >
@@ -56,6 +51,12 @@ export default function Credentials() {
             <span className="cred-arrow">↗</span>
           </a>
         ))}
+      </div>
+      <div style={{marginTop: "2.7em", marginBottom: "2em"}}>
+        <h3 style={{textAlign:"center",color:"#fd2d44",marginBottom:"1em",letterSpacing:".04em"}}>
+          Or send me a message directly!
+        </h3>
+        <ContactForm />
       </div>
       <style>{`
         .cred-grid {

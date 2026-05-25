@@ -14,6 +14,7 @@ export default function About() {
           <div className="orbit orbit1"><div className="orbit-dot" /></div>
           <div className="orbit orbit2"><div className="orbit-dot" /></div>
           <div className="about-hex"><span className="about-hex-inner">SM</span></div>
+        
         </div>
         <div className="about-text reveal delay-2">
           <p>Hey — I'm <strong>Sai Mendoza</strong>, a passionate student diving deep into the world of code and design. I build things for the web and craft visuals that catch eyes.</p>
