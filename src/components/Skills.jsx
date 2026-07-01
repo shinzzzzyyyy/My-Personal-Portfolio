@@ -15,7 +15,7 @@ export default function Skills() {
       cat: "Design",
       name: "Adobe Photoshop",
       desc: "Photo manipulation, poster design, and graphic creation at a moderate level.",
-      techs: ["Photo Edit", "Compositing", "Typography", "Pubmats],
+      techs: ["Photo Edit", "Compositing", "Typography", "Pubmats"],
     },
     {
       icon: canvaLogo,
